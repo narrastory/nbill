@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+backend/public/
+
+# Runtime configuration and secrets
+backend/config.json
+.env
+.env.*
+!.env.example
+!frontend/.env.example
+
+# Private accounting data and runtime state
+backend/data/
+backend/logs/
+backend/backups/
+backend/exported_data/
+backend/data_test/
+backend/表结构示例(测试)/
+*.enc
+*.hash
+*.salt
+*.lock
+
+# Local history preserved during monorepo migration
+.local-history/
+
+# Logs and test artifacts
+*.log
+coverage/
+.nyc_output/
+
+# Editors and operating systems
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!frontend/.vscode/extensions.json
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local implementation notes
+docs/superpowers/

@@ -1,0 +1,52 @@
+{
+  "server": {
+    "port": 9081,
+    "host": "127.0.0.1"
+  },
+  "user": {
+    "username": "your-name"
+  },
+  "auth": {
+    "jwtSecret": "",
+    "jwtExpiry": "2h",
+    "bruteForce": {
+      "maxAttempts": 5,
+      "lockoutDelayMs": 10000
+    }
+  },
+  "business": {
+    "initialBalance": 0,
+    "editWindowDays": 45
+  },
+  "analytics": {
+    "monthInterval": 1,
+    "recentMonths": 12
+  },
+  "storage": {
+    "dataDir": "./data",
+    "logsDir": "./logs",
+    "backupsDir": "./backups",
+    "autoSaveIntervalMs": 300000,
+    "backupIntervalHours": 24,
+    "maxBackups": 30
+  },
+  "crypto": {
+    "pbkdf2": {
+      "iterations": 100000,
+      "keyLength": 32,
+      "digest": "sha512"
+    }
+  },
+  "cors": {
+    "origin": "http://localhost:5173",
+    "methods": ["GET", "POST", "PUT", "DELETE"],
+    "allowedHeaders": ["Content-Type", "Authorization"],
+    "credentials": true
+  },
+  "logging": {
+    "level": "info",
+    "dir": "./logs",
+    "maxFiles": "14d",
+    "maxSize": "20m"
+  }
+}

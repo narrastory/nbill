@@ -1,0 +1,159 @@
+/**
+ * NBill 设计令牌（Design Tokens）
+ * ---------------------------------------------------------------------------
+ * 单一事实来源：所有颜色、圆角、阴影、字体只在这里定义一次。
+ * Tailwind 通过 @theme 暴露为工具类（bg-brand-600 / text-income …）；
+ * Element Plus 通过 --el-* 变量映射到同一组颜色；
+ * 组件与图表一律引用 CSS 变量，不允许散落硬编码色值。
+ */
+
+@theme {
+  /* ---- Ledger Ink：按钮与导航，不再与收入语义共用一套绿色 ---- */
+  --color-brand-50: #edf5f1;
+  --color-brand-100: #d8e9e1;
+  --color-brand-200: #b5d4c6;
+  --color-brand-300: #86b7a3;
+  --color-brand-400: #57957f;
+  --color-brand-500: #31725e;
+  --color-brand-600: #174c3c;
+  --color-brand-700: #123f32;
+  --color-brand-800: #0e3329;
+  --color-brand-900: #0a281f;
+  --color-brand-950: #061c16;
+
+  /* ---- 语义色 ---- */
+  /* 收入 / 正向现金流 */
+  --color-income-50: #eaf7f4;
+  --color-income-400: #24a994;
+  --color-income-500: #0e8f7c;
+  --color-income-600: #087b6b;
+  --color-income-700: #076557;
+
+  /* 支出 / 负向现金流（暖红，与品牌绿形成足够对比度） */
+  --color-expense-50: #fdf0ee;
+  --color-expense-400: #d66c63;
+  --color-expense-500: #c9584e;
+  --color-expense-600: #c2473d;
+  --color-expense-700: #a83a33;
+
+  /* 状态 */
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-info-500: #0ea5e9;
+  --color-info-600: #0284c7;
+
+  /* ---- Graphite / Paper：轻微偏绿的纸面中性色 ---- */
+  --color-ink-50: #f3f6f4;
+  --color-ink-100: #e9eeeb;
+  --color-ink-200: #d7dfda;
+  --color-ink-300: #bdc9c2;
+  --color-ink-400: #899a91;
+  --color-ink-500: #62736a;
+  --color-ink-600: #47584f;
+  --color-ink-700: #304139;
+  --color-ink-800: #18231f;
+  --color-ink-900: #101915;
+
+  /* ---- 圆角 / 阴影 ---- */
+  --radius-card: 0.5rem;
+  --radius-floating: 0.75rem;
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --shadow-float: 0 24px 64px -24px rgb(2 44 34 / 0.32);
+
+  /* ---- 字体 ---- */
+  --font-sans:
+    'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, -apple-system,
+    'Segoe UI', sans-serif;
+  /* 金额与统计数字使用等宽数字，避免表格与图表内数字跳动 */
+  --font-mono:
+    ui-monospace, 'SFMono-Regular', 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+
+  /* ---- 动画时长：统一节奏，避免各处随手写 ms ---- */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------------------
+ * 运行时可读的语义变量（浅色主题）。
+ * 图表与 Element Plus 覆盖样式读取这一层，以便将来支持暗色主题时只替换此处。
+ * ------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  --nb-bg: var(--color-ink-50);
+  --nb-surface: #ffffff;
+  --nb-surface-muted: var(--color-ink-100);
+  --nb-border: var(--color-ink-200);
+  --nb-text: var(--color-ink-800);
+  --nb-text-muted: var(--color-ink-500);
+  --nb-text-subtle: var(--color-ink-400);
+
+  --nb-primary: var(--color-brand-600);
+  --nb-primary-hover: var(--color-brand-700);
+  --nb-primary-soft: var(--color-brand-50);
+  --nb-accent: var(--color-brand-500);
+
+  --nb-income: var(--color-income-600);
+  --nb-expense: var(--color-expense-600);
+  --nb-warning: var(--color-warning-500);
+  --nb-info: var(--color-info-500);
+
+  --nb-content-max: 90rem;
+  --nb-space-page: clamp(0.875rem, 2.2vw, 1.75rem);
+  --nb-radius-data: 0.5rem;
+  --nb-radius-floating: 0.75rem;
+
+  /* 图表调色板：分类系列色，绿色系优先，保证同一分类跨图表配色一致 */
+  --nb-chart-1: var(--color-income-600);
+  --nb-chart-2: var(--color-info-500);
+  --nb-chart-3: var(--color-warning-500);
+  --nb-chart-4: #8b5cf6;
+  --nb-chart-5: var(--color-expense-500);
+  --nb-chart-6: #14b8a6;
+  --nb-chart-7: #f97316;
+  --nb-chart-8: #6366f1;
+  --nb-chart-9: #84cc16;
+  --nb-chart-10: #ec4899;
+}
+
+/* ---------------------------------------------------------------------------
+ * Element Plus 主色对齐。
+ * 用 color-mix 从 --color-brand-600 派生全部梯度，避免逐个硬编码 hex；
+ * 改主题色时只需修改上面的 --color-brand-* 一处。
+ * ------------------------------------------------------------------------- */
+:root {
+  --el-color-primary: var(--nb-primary);
+  --el-color-primary-light-3: color-mix(in srgb, var(--nb-primary) 70%, #ffffff);
+  --el-color-primary-light-5: color-mix(in srgb, var(--nb-primary) 50%, #ffffff);
+  --el-color-primary-light-7: color-mix(in srgb, var(--nb-primary) 30%, #ffffff);
+  --el-color-primary-light-8: color-mix(in srgb, var(--nb-primary) 20%, #ffffff);
+  --el-color-primary-light-9: color-mix(in srgb, var(--nb-primary) 10%, #ffffff);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--nb-primary) 80%, #000000);
+
+  --el-color-success: var(--nb-income);
+  --el-color-danger: var(--nb-expense);
+  --el-color-error: var(--nb-expense);
+  --el-color-warning: var(--nb-warning);
+  --el-color-info: var(--nb-info);
+
+  --el-border-radius-base: 0.5rem;
+  --el-border-radius-small: 0.375rem;
+  --el-font-family: var(--font-sans);
+}
+
+/* ---------------------------------------------------------------------------
+ * 尊重用户的减少动效偏好：全局降级，图表与自定义动画另需单独判断。
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

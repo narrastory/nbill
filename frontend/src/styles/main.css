@@ -1,0 +1,142 @@
+/**
+ * 层叠顺序声明必须在所有 @import 之前。
+ *
+ * 两个约束需要同时满足：
+ *  1. Tailwind 的 preflight（base 层）会把 button 等元素重置为无背景，
+ *     若 element-plus 排在 base **之前**，EP 组件的样式会被重置掉
+ *     （表现为按钮丢失背景色）—— 因此 element-plus 必须排在 base **之后**。
+ *  2. 又要能用工具类覆盖 EP 组件 —— 因此 element-plus 必须排在 utilities **之前**。
+ *
+ * 最终顺序：theme → base → element-plus → components → utilities。
+ * 注意 EP 的 CSS 是未分层的，未分层样式会压过所有分层样式，
+ * 所以必须用 `layer(element-plus)` 显式归层。
+ */
+@layer theme, base, element-plus, components, utilities;
+
+@import 'tailwindcss';
+@import './theme.css';
+@import 'element-plus/dist/index.css' layer(element-plus);
+
+@layer base {
+  html {
+    /* 缩放与窄屏下字号平滑收缩，避免大标题溢出 */
+    font-size: clamp(15px, 0.9rem + 0.15vw, 16px);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--nb-bg);
+    color: var(--nb-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  [role='button'],
+  a,
+  input,
+  select {
+    touch-action: manipulation;
+  }
+
+  /* 金额、统计数字统一等宽，避免刷新时列宽跳动 */
+  .tabular,
+  .el-table .cell,
+  .nb-amount {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* 键盘可达性：统一可见焦点环，且不依赖颜色单独传达信息 */
+  :focus-visible {
+    outline: 2px solid var(--nb-primary);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  /* 屏幕阅读器专用文本 */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+@layer components {
+  /* 卡片：全站统一的容器外观 */
+  .nb-card {
+    background-color: var(--nb-surface);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--radius-card);
+    box-shadow: none;
+  }
+
+  .nb-section {
+    padding-block: clamp(1rem, 2vw, 1.5rem);
+    border-bottom: 1px solid var(--nb-border);
+  }
+
+  .nb-data-surface {
+    background-color: var(--nb-surface);
+    border: 1px solid var(--nb-border);
+    border-radius: var(--nb-radius-data);
+  }
+
+  .nb-floating-surface {
+    background-color: var(--nb-surface);
+    border: 1px solid color-mix(in srgb, var(--nb-border) 72%, transparent);
+    border-radius: var(--nb-radius-floating);
+    box-shadow: var(--shadow-float);
+  }
+
+  /* 金额语义色 */
+  .nb-amount--income {
+    color: var(--nb-income);
+  }
+  .nb-amount--expense {
+    color: var(--nb-expense);
+  }
+
+  .nb-page-title {
+    font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+    font-weight: 650;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+
+  .nb-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .el-button:not(.is-link),
+  .el-input__wrapper,
+  .el-select__wrapper {
+    min-height: 2.5rem;
+  }
+
+  .el-table th.el-table__cell {
+    color: var(--nb-text-muted);
+    background-color: var(--nb-surface-muted);
+  }
+
+  .el-table .cell {
+    line-height: 1.45;
+  }
+}
+
+/* 历史纠错的确认弹窗带换行说明，需要保留换行符。
+   该弹窗由 ElMessageBox 挂到 body，作用域样式够不到，因此放在全局。 */
+.nb-confirm-dialog .el-message-box__message {
+  white-space: pre-line;
+  line-height: 1.65;
+}

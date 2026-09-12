@@ -1,0 +1,34 @@
+{
+  "name": "nbill",
+  "version": "3.0.0",
+  "private": true,
+  "description": "NBill local-first personal accounting API",
+  "license": "ISC",
+  "author": "Narrastory",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "set-password": "node scripts/set-password.js",
+    "import-csv": "node scripts/import-csv.js",
+    "export-csv": "node scripts/export-csv.js",
+    "test": "mocha tests/**/*.test.js --exit --timeout 15000"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "helmet": "^8.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "chai": "^6.2.2",
+    "mocha": "^11.3.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
+  }
+}
