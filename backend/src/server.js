@@ -95,7 +95,7 @@ export function createApp() {
       res.status(200).json({
         message: 'NBill v3.0 API Server',
         version: '3.0.0',
-        docs: 'See docs/FRONTEND_API.md in the repository',
+        docs: 'See docs/frontend-backend-manual/ in the repository',
       });
     }
   });

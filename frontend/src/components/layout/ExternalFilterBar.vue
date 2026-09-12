@@ -7,7 +7,7 @@
  *
  * 往来类型与往来方必须来自后端字典；字段名是小写的
  * `Flowtype` / `Relatedparty`，与流水上的驼峰字段不同名，见
- * docs/FRONTEND_API.md 的外部往来接口章节。
+ * docs/frontend-backend-manual/API_REFERENCE.md 的外部往来接口章节。
  */
 import { computed, reactive, ref, watch } from 'vue'
 

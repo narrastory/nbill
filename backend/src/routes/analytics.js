@@ -41,7 +41,7 @@ router.get('/data-quality', (req, res) => res.status(200).json(inspectDataQualit
  * Triggers fresh computation on each call.
  * Optional query parameters: dateFrom and dateTo (inclusive).
  *
- * Response: Full analytics JSON object (see docs/FRONTEND_API.md for structure).
+ * Response: Full analytics JSON object (see docs/frontend-backend-manual/API_REFERENCE.md for structure).
  */
 router.get('/summary', async (req, res) => {
   try {

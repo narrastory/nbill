@@ -61,7 +61,7 @@ src/
 
 ## 数据使用约束
 
-完整接口字段和统计口径见 [`../docs/FRONTEND_API.md`](../docs/FRONTEND_API.md)。开发时尤其注意：
+完整接口字段和统计口径见 [`../docs/frontend-backend-manual/README.md`](../docs/frontend-backend-manual/README.md)。开发时尤其注意：
 
 1. 普通收支净额、外部往来现金流和现金余额是三套不同口径；初始余额不是收入。
 2. 百分比等统计字段中的 `null` 表示“不适用或不可计算”，不能当作 `0`。

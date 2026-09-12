@@ -200,4 +200,4 @@ npm run build
 
 ## 12. 接口与业务口径
 
-所有请求字段、响应结构、日期范围、期初/期末现金和分析含义见 [FRONTEND_API.md](FRONTEND_API.md)。修改前后端接口时应同步更新该文档。
+所有请求字段、响应结构、日期范围、期初/期末现金和分析含义见 [前端开发用后端手册](frontend-backend-manual/README.md)。修改前后端接口时应同步更新该文档。

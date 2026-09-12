@@ -2,7 +2,7 @@
 /**
  * 外部往来表单：新增（含连续添加）与编辑共用。
  *
- * ⚠️ 字段名约定（见 docs/FRONTEND_API.md）：
+ * ⚠️ 字段名约定（见 docs/frontend-backend-manual/API_REFERENCE.md）：
  *  - 流水上用的是**驼峰** `FlowType` / `RelatedParty`；
  *  - 字典接口返回的才是**小写** `Flowtype` / `Relatedparty`。
  *  两者不同名，不能合并成一个类型。

@@ -12,7 +12,7 @@
  *   Ctrl/Cmd + Enter → 保存并关闭
  *
  * 字段大小写严格按后端：标签是单数 `Tag`（逗号分隔字符串），
- * 不是 `Tags`。详见 docs/FRONTEND_API.md。
+ * 不是 `Tags`。详见 docs/frontend-backend-manual/API_REFERENCE.md。
  */
 
 import { computed, nextTick, reactive, ref, watch } from 'vue'
